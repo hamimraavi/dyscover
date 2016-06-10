@@ -1,6 +1,6 @@
 import requests
 
-import api_keys
+from django.conf import settings
 
 
 def get_lat_lon(location, header):
@@ -29,7 +29,7 @@ def search_restaurants(location, start="0", queries="5"):
     header = {
         "User-agent": "curl/7.43.0",
         "Accept": "application/json",
-        "user_key": api_keys.zomato,
+        "user_key": settings.ZOMATO_KEY,
         }
 
     location = get_lat_lon(location, header)
