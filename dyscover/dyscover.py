@@ -35,7 +35,6 @@ def search_restaurants(location, start="0", queries="5"):
     location = get_lat_lon(location, header)
 
     if "Error" in location:
-        results["Status"] = "404"
         return results
 
     lat = str(location["latitude"])
@@ -49,10 +48,8 @@ def search_restaurants(location, start="0", queries="5"):
     try:
         res = response.json()
     except ValueError:
-        results["Status"] = "404"
         return results
 
-    results["Status"] = "200"
     results["Restaurants"] = []
     for rest_idx in range(int(start), int(queries)):
 

@@ -11,7 +11,8 @@ def show_restaurants(request):
     location = request.GET.get('q')
     if not location:
         res = {}
-        res["Status"] = "400"
-        return JsonResponse(res, safe=False)
+        return JsonResponse(res, status=400, safe=False)
     res = dyscover.search_restaurants(location)
-    return JsonResponse(res, safe=False)
+    if not res:
+        return JsonResponse(data=res, status=404, safe=False)
+    return JsonResponse(data=res, status=200, safe=False)
