@@ -1,5 +1,7 @@
 import requests
 
+import api_keys
+
 
 def get_lat_lon(location, header):
     location_url = ("https://developers.zomato.com/api/v2.1/locations?"
@@ -27,7 +29,7 @@ def search_restaurants(location, start="0", queries="5"):
     header = {
         "User-agent": "curl/7.43.0",
         "Accept": "application/json",
-        "user_key": "73b44e74c879ee61cd9b0220830e3971",
+        "user_key": api_keys.zomato,
         }
 
     location = get_lat_lon(location, header)
