@@ -5,4 +5,4 @@ from . import views
 urlpatterns = [
     url(r'^search/.*$', views.show_restaurants, name='show_restaurants'),
     url(r'^$', views.index, name='index'),
-    ]
+]
