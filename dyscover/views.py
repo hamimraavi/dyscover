@@ -1,10 +1,6 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 import zomato_api
-
-
-def index(request):
-    return HttpResponse("Welcome to dyscover")
 
 
 def show_restaurants(request):
