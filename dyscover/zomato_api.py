@@ -32,7 +32,7 @@ def search_restaurants(location, start="0", queries="5"):
     results = {}
 
     header = {
-        "User-agent": "curl/7.43.0",
+        #"User-agent": "curl/7.43.0",
         "Accept": "application/json",
         "user_key": settings.ZOMATO_KEY,
     }
