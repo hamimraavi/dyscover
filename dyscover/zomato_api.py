@@ -67,4 +67,4 @@ def search_restaurants(location, start="0", queries="5"):
 
         results["Restaurants"].append(rest_dictionary)
     status_code = 200
-    return (results, 200)
+    return (results, status_code)
