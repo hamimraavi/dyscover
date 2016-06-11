@@ -8,13 +8,13 @@ BASE_URL = "https://developers.zomato.com/api/v2.1"
 
 def get_lat_lon(location, header):
     coordinates = {}
-    location_url = ("%s/locations?query=%s") % (BASE_URL, location)
+    location_url = "%s/locations?query=%s" % (BASE_URL, location)
 
     try:
         response = requests.get(location_url, headers=header)
     except ConnectionError:
-        coordinates["Error"] = 503
-        return coordinates
+        status_code = 503
+        return (coordinates, status_code)
 
     res = response.json()
     try:
@@ -22,9 +22,10 @@ def get_lat_lon(location, header):
         coordinates["longitude"] = (
             res["location_suggestions"][0]["longitude"])
     except IndexError:
-        coordinates["Error"] = 404
-        return coordinates
-    return coordinates
+        status_code = 404
+        return (coordinates, status_code)
+    status_code = 200
+    return (coordinates, status_code)
 
 
 def search_restaurants(location, start="0", queries="5"):
@@ -36,23 +37,22 @@ def search_restaurants(location, start="0", queries="5"):
         "user_key": settings.ZOMATO_KEY,
     }
 
-    location = get_lat_lon(location, header)
+    location, status_code = get_lat_lon(location, header)
 
-    if "Error" in location:
-        results["Status"] = location["Error"]
-        return results
+    if status_code != 200:
+        return (results, status_code)
 
     lat = str(location["latitude"])
     lon = str(location["longitude"])
 
-    search_url = ("%s/search?start=%s&count=%s&lat=%s&lon=%s") % (
+    search_url = "%s/search?start=%s&count=%s&lat=%s&lon=%s" % (
         BASE_URL, start, queries, lat, lon)
 
     try:
         response = requests.get(search_url, headers=header)
     except ConnectionError:
-        results["Status"] = 503
-        return results
+        status_code = 503
+        return (results, status_code)
 
     res = response.json()
 
@@ -66,4 +66,5 @@ def search_restaurants(location, start="0", queries="5"):
             res["restaurants"][rest_idx]["restaurant"]["url"])
 
         results["Restaurants"].append(rest_dictionary)
-    return results
+    status_code = 200
+    return (results, 200)
