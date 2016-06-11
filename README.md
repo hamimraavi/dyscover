@@ -1,11 +1,6 @@
 # dyscover
 
-This api provides the list of restaurants in the given location.  
-The location is provided via a query parameter in the url.  
-The result is returned as a Json response.  
-The sample url is:
-
-/api/search/?q=connaught%20place
+This API provides the list of restaurants in the given location. The location is provided via a query parameter in the URL. The result is returned as a JSON response.  
 
 # API Documentation
 
