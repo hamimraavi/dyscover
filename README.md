@@ -2,11 +2,10 @@
 
 This api provides the list of restaurants in the given location.  
 The location is provided via a query parameter in the url.  
-The app is currently deployed on localhost. The result is  
-returned as a Json response.  
+The result is returned as a Json response.  
 The sample url is:
 
-http://localhost:8000/api/search/?q=connaught%20place
+/api/search/?q=connaught%20place
 
 **Request method:** GET
 
