@@ -123,8 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    "/Users/Hamim/Desktop/django/findfood/webpage/static_dumps",
-    #os.path.join(BASE_DIR, 'webpage/static_dumps'),
+    os.path.join(BASE_DIR, 'webpage/static_dumps'),
 )
 
 try:
