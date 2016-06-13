@@ -8,7 +8,8 @@ BASE_URL = "https://developers.zomato.com/api/v2.1"
 
 def get_lat_lon(location, header):
     coordinates = {}
-    location_url = "%s/locations?query=%s" % (BASE_URL, location)
+    location_url = ("{base}/locations?query={location}".format(
+        base=BASE_URL, location=location))
 
     try:
         response = requests.get(location_url, headers=header)
@@ -45,8 +46,9 @@ def search_restaurants(location, start="0", queries="5"):
     lat = str(location["latitude"])
     lon = str(location["longitude"])
 
-    search_url = "%s/search?start=%s&count=%s&lat=%s&lon=%s" % (
-        BASE_URL, start, queries, lat, lon)
+    search_url = ("{base}/search?start={start}&count={queries}&lat={lat}" +
+                  "&lon={lon}").format(base=BASE_URL, start=start,
+                                       queries=queries, lat=lat, lon=lon)
 
     try:
         response = requests.get(search_url, headers=header)
