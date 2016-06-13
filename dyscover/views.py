@@ -9,4 +9,7 @@ def show_restaurants(request):
         res = {}
         return JsonResponse(res, status=400, safe=False)
     res, status_code = zomato_api.search_restaurants(location)
-    return JsonResponse(data=res, status=status_code, safe=False)
+    response = JsonResponse(data=res, status=status_code, safe=False)
+    response['Access-Control-Allow-Origin'] = '*'
+    response['Access-Control-Allow-Methods'] = 'GET'
+    return response
