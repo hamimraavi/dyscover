@@ -6,7 +6,7 @@
 <script>
 function showInput(){
   var location = document.getElementById("q_id").value;
-  var BASE_URL = "http://localhost:8000/api/search/";
+  var BASE_URL = "/api/search/";
   $("#display").html("Fetching results...");
   $.getJSON(BASE_URL, {q:location}, function(data, status){
     var restaurantList = data["Restaurants"];
