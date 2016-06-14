@@ -6,15 +6,16 @@
 <script>
 function showInput(){
   var location = document.getElementById("q_id").value;
-  var result = "<ol>";
+  var BASE_URL = "http://localhost:8000/api/search/";
   $("#display").html("Fetching results...");
-  $.getJSON("http://localhost:8000/api/search/", {q:location}, function(data, status){
-    var restaurant_list = data["Restaurants"];
-    for (var index = 0; index < restaurant_list.length; index++){
-      var restaurant_name = restaurant_list[index]["Name"];
-      var restaurant_url = restaurant_list[index]["Url"];
-      result += "<li><a href=" + restaurant_url + ">" 
-        + restaurant_name + "</a></li>";
+  $.getJSON(BASE_URL, {q:location}, function(data, status){
+    var restaurantList = data["Restaurants"];
+    var result = "<ol>";
+    for (var index = 0; index < restaurantList.length; index++){
+      var restaurantName = restaurantList[index]["Name"];
+      var restaurantUrl = restaurantList[index]["Url"];
+      result += "<li><a href=" + restaurantUrl + ">" 
+        + restaurantName + "</a></li>";
     }
     result += "</li>"
     $("#display").html(result);
@@ -22,17 +23,14 @@ function showInput(){
   .error(function(data, status){
     $("#display").html("Not found");
   });
-  return false;
 }
 </script>
 </head>
 <body>
 <h1>Find a restaurant nearby</h1>
 <h3>Enter a location:</h3>
-<form id="target">
   <input type="text" name="q" value="" id="q_id">
   <input type="button" value="Find" onclick="showInput();">
-</form>
 <br>
 <p><span id="display"></span></p>
 </body>
